@@ -153,7 +153,7 @@ sys_thread_create(void)
   char* arg;
   char* stack;
   int pid;
-  
+
   //get arguments
   if (argptr(0, &fcn, 4) < 0)
     cprintf("%s\n", "argptr(fcn) error");
@@ -161,8 +161,8 @@ sys_thread_create(void)
     cprintf("%s\n", "argptr(arg) error");
   if (argptr(0, &stack, 4) < 0)
     cprintf("%s\n", "argptr(stack) error");
-  pid = thread_create((void (*)(void *))fcn, arg, stack);
-  return pid ? pid : -1;//
+
+  return thread_create((void (*)(void *))fcn, arg, stack);//
 }
 
 int

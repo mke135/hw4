@@ -50,6 +50,8 @@ int main(int argc, char *argv[]) {
   s1 = malloc(4096);
   s2 = malloc(4096);
 
+  printf(1, "start creating threads");
+
   t1 = thread_create(do_work, (void*)&b1, s1);
   t2 = thread_create(do_work, (void*)&b2, s2); 
 
