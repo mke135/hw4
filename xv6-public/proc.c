@@ -595,7 +595,7 @@ thread_create(void(*fcn)(void*), void *arg, void*stack) //similar with fork
   np->state = RUNNABLE;
 
   release(&ptable.lock);
-
+  printf(1, "create%d\n", &pid);
   return pid;
 }
 
@@ -667,6 +667,15 @@ thread_exit(void)
   // Parent might be sleeping in wait().
   wakeup1(curproc->parent);
 
+  // Pass abandoned children to init.
+  for(p = ptable.proc; p < &ptable.proc[NPROC]; p++){
+    if(p->parent == proc){
+      p->parent = initproc;
+      if(p->state == ZOMBIE)
+        wakeup1(initproc);
+    }
+  }
+  
   // Jump into the scheduler, never to return.
   curproc->state = ZOMBIE;
   sched();
