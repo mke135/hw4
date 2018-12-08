@@ -581,9 +581,6 @@ thread_create(void(*fcn)(void*), void *arg, void*stack) //similar with fork
   safestrcpy(np->name, curproc->name, sizeof(curproc->name));
 
   pid = np->pid;
-  
-  acquire(&ptable.lock);
-  np->state = RUNNABLE;
 
   //stack for the new thread
   char* sp = (char*)stack + 4096 - 4;
@@ -593,6 +590,9 @@ thread_create(void(*fcn)(void*), void *arg, void*stack) //similar with fork
   memmove(sp, &base, sizeof(int));
   np->tf->esp = (int)sp;
   np->tf->eip = (int)fcn;
+
+  acquire(&ptable.lock);
+  np->state = RUNNABLE;
 
   release(&ptable.lock);
 
