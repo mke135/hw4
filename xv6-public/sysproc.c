@@ -152,7 +152,6 @@ sys_thread_create(void)
   char* fcn;
   char* arg;
   char* stack;
-  int pid;
 
   //get arguments
   if (argptr(0, &fcn, 4) < 0)
