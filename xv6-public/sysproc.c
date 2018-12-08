@@ -149,8 +149,11 @@ sys_getprocinfo(void)
 int
 sys_thread_create(void)
 {
-  char* fcn, arg, stack;
+  char* fcn;
+  char* arg;
+  char* stack;
   int pid;
+  
   //get arguments
   if (argptr(0, &fcn, 4) < 0)
     cprintf("%s\n", "argptr(fcn) error");
