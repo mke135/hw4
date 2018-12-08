@@ -558,18 +558,16 @@ thread_create(void(*fcn)(void*), void *arg, void*stack) //similar with fork
   struct proc *np;
   struct proc *curproc = myproc();
   
-  acquire(&ptable.lock);
   // Allocate space.
   if((np = allocproc()) == 0){
-    release(&ptable.lock);
     return -1;
   }
 
   // Copy process state from proc.
-  *np->tf = *curproc->tf;
   np->pgdir = curproc->pgdir;
   np->sz = curproc->sz;
   np->parent = curproc;
+  *np->tf = *curproc->tf;
 
   // Clear %eax so that fork returns 0 in the child.
   np->tf->eax = 0;
@@ -583,7 +581,10 @@ thread_create(void(*fcn)(void*), void *arg, void*stack) //similar with fork
   safestrcpy(np->name, curproc->name, sizeof(curproc->name));
 
   pid = np->pid;
+  
+  acquire(&ptable.lock);
   np->state = RUNNABLE;
+
   //stack for the new thread
   char* sp = (char*)stack + 4096 - 4;
   int base = 0xFFFFFFFF;
