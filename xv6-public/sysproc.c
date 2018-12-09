@@ -145,33 +145,3 @@ sys_getprocinfo(void)
 	}
 	else return 1;
 }
-
-int
-sys_thread_create(void)
-{
-  char* fcn;
-  char* arg;
-  char* stack;
-
-  //get arguments
-  if (argptr(0, &fcn, 4) < 0)
-    cprintf("%s\n", "argptr(fcn) error");
-  if (argptr(1, &arg, 4) < 0)
-    cprintf("%s\n", "argptr(arg) error");
-  if (argptr(0, &stack, 4) < 0)
-    cprintf("%s\n", "argptr(stack) error");
-
-  return thread_create((void (*)(void *))fcn, arg, stack);//
-}
-
-int
-sys_thread_join(void)
-{
-  return thread_join();
-}
-int
-
-sys_thread_exit(void)
-{
-  return thread_exit();
-}

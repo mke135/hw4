@@ -22,6 +22,3 @@
 #define SYS_close  21
 #define SYS_backtrace 22 //add system call backtrace
 #define SYS_getprocinfo 23 //add system call getprocinfo
-#define SYS_thread_create  24
-#define SYS_thread_join  25
-#define SYS_thread_exit  26

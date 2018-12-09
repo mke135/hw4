@@ -183,7 +183,6 @@ UPROGS=\
 	_zombie\
 	_bt\
 	_ps\
-	_thread\
 
 fs.img: mkfs README $(UPROGS)
 	./mkfs fs.img README $(UPROGS)
