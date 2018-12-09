@@ -625,6 +625,7 @@ thread_join(void)
         p->killed = 0;
         p->state = UNUSED;
         release(&ptable.lock);
+        cprintf("join pid%d\n", pid);
         return pid;
       }
     }
@@ -638,7 +639,6 @@ thread_join(void)
     // Wait for children to exit.  (See wakeup1 call in proc_exit.)
     sleep(curproc, &ptable.lock);  //DOC: wait-sleep
   }
-  return 0;
 }
 
 int 
