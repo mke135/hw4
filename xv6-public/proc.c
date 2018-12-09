@@ -595,7 +595,7 @@ thread_create(void(*fcn)(void*), void *arg, void*stack) //similar with fork
   np->state = RUNNABLE;
 
   release(&ptable.lock);
-  printf(1, "create%d\n", &pid);
+  cprintf("create%d\n", &pid);
   return pid;
 }
 
