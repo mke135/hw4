@@ -638,6 +638,7 @@ thread_join(void)
     // Wait for children to exit.  (See wakeup1 call in proc_exit.)
     sleep(curproc, &ptable.lock);  //DOC: wait-sleep
   }
+  return 0;
 }
 
 int 
