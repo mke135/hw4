@@ -644,6 +644,7 @@ int
 thread_exit(void)
 {
   struct proc *curproc = myproc();
+  struct proc *p;
   int fd;
 
   if(curproc == initproc)
@@ -669,13 +670,13 @@ thread_exit(void)
 
   // Pass abandoned children to init.
   for(p = ptable.proc; p < &ptable.proc[NPROC]; p++){
-    if(p->parent == proc){
+    if(p->parent == curproc){
       p->parent = initproc;
       if(p->state == ZOMBIE)
         wakeup1(initproc);
     }
   }
-  
+
   // Jump into the scheduler, never to return.
   curproc->state = ZOMBIE;
   sched();
