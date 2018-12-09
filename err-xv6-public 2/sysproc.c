@@ -170,7 +170,7 @@ sys_thread_join(void)
   return thread_join();
 }
 
-int
+void
 sys_thread_exit(void)
 {
   thread_exit();

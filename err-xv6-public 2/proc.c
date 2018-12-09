@@ -641,7 +641,7 @@ thread_join(void)
   }
 }
 
-int 
+void 
 thread_exit(void)
 {
   struct proc *curproc = myproc();
